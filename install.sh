@@ -24,3 +24,6 @@ bash Miniconda2-latest-Linux-x86_64.sh
 conda config --add channels bioconda
 conda install entrez-direct
 
+#sra toolkit
+wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.9.0/sratoolkit.2.9.0-ubuntu64.tar.gz
+echo "export PATH=\${PATH}:/home/ubuntu/metaphlan2" >> $HOME/.bashrc
