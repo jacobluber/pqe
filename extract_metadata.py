@@ -46,8 +46,8 @@ def write_to_file(d,output_fh,individual):
 		for r_key in sorted(d[individual]["rna"].keys()):
                         rna.append(d[individual]["rna"][r_key])
                         rna_order.append(r_key) 
-		if len(dna) > 2:
-			if len(rna) > 2:
+		if len(dna) > 3:
+			if len(rna) > 3:
 				if len(rna) == len(dna):
 					timepoint_arr = []
 					individual_arr = []
@@ -56,12 +56,13 @@ def write_to_file(d,output_fh,individual):
 						individual_arr.append(individual)
 						timepoint_arr.append(count)
 						count+=1
-					output_fh.write("\t".join(map(lambda x: str(x[0])+','+str(x[1])+','+str(x[2])+','+str(x[3]),zip(dna,rna,individual_arr,timepoint_arr)))+'\n')
-				#output_fh.write(str(individual)+'\t''\t'+",".join(map(lambda x: str(x),dna_order))+'\t'+",".join(map(lambda y: str(y),rna_order))+'\n')
+					for x in zip(dna,rna,individual_arr,timepoint_arr):
+						t=map(lambda y: str(y),x)
+						output_fh.write(",".join(t)+'\n')
+					#output_fh.write("\t".join(map(lambda x: str(x[0])+','+str(x[1])+','+str(x[2])+','+str(x[3]),zip(dna,rna,individual_arr,timepoint_arr)))+'\n')
 
 for individual in metadata_assoc.keys():
 	write_to_file(metadata_assoc,output_fh,individual)
 
 runinfo_fh.close()
 output_fh.close()
-
