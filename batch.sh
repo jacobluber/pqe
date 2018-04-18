@@ -1,3 +1,2 @@
 #!/bin/bash
-git pull
-for x in $(cat ${1});do ./pipeline.sh ${x};done
+for x in $(cat gnus/${1});do ./pipeline.sh ${x};done
