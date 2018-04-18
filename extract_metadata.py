@@ -5,7 +5,7 @@ import os
 #deal with file io
 runinfo_fh = open(sys.argv[1],'r')
 output_fh = open(sys.argv[2],'w')
-output_fh.write("Individual\tDNA\tRNA\tDNA_order\tRNA_order\n")
+#output_fh.write("Individual\tDNA\tRNA\tDNA_order\tRNA_order\n")
 runinfo = []
 
 #make a metadata association dictionary 
@@ -14,10 +14,10 @@ for line in runinfo_fh:
 metadata_assoc = {}
 for elem in runinfo:
 	library_name = elem[11]
-	id_and_time = elem[11].split('.')[0]
-	seq_type = elem[11].split('.')[1]
-	indiv = id_and_time.split('_')[0]
-	time = int(id_and_time.split('_')[1][2:])
+	split_data = elem[11].split('_')
+	seq_type = split_data[2]
+	indiv = split_data[0]
+	time = int(split_data[1][2:])
 	run = elem[0]
 	if metadata_assoc.has_key(indiv):
 		if seq_type == "rna":
@@ -47,8 +47,17 @@ def write_to_file(d,output_fh,individual):
                         rna.append(d[individual]["rna"][r_key])
                         rna_order.append(r_key) 
 		if len(dna) > 2:
-			if len (rna) > 2:
-				output_fh.write(str(individual)+'\t'+",".join(dna)+'\t'+",".join(rna)+'\t'+",".join(map(lambda x: str(x),dna_order))+'\t'+",".join(map(lambda y: str(y),rna_order))+'\n')
+			if len(rna) > 2:
+				if len(rna) == len(dna):
+					timepoint_arr = []
+					individual_arr = []
+					count = 1
+					for arb_unit in range(0,len(dna)):
+						individual_arr.append(individual)
+						timepoint_arr.append(count)
+						count+=1
+					output_fh.write("\t".join(map(lambda x: str(x[0])+','+str(x[1])+','+str(x[2])+','+str(x[3]),zip(dna,rna,individual_arr,timepoint_arr)))+'\n')
+				#output_fh.write(str(individual)+'\t''\t'+",".join(map(lambda x: str(x),dna_order))+'\t'+",".join(map(lambda y: str(y),rna_order))+'\n')
 
 for individual in metadata_assoc.keys():
 	write_to_file(metadata_assoc,output_fh,individual)
