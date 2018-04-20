@@ -1,0 +1,16 @@
+''	no genes
+1,3,4	lar 
+1,2,3,4	maintained 
+3,4	gained   
+1,4	lar
+1,2	lost
+1,3	lagal
+3	singleton
+1	singleton
+1,2,4	lar
+2	singleton
+1,2,3	lost
+2,4	galag
+2,3	gal
+4	singleton
+2,3,4	gained 
