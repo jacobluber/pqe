@@ -11,42 +11,48 @@ def set_to_key(input_set):
 	return out
 
 ifh = open(sys.argv[1],'r')
-mappingfh = open(sys.argv[2],'r')
-mapping_d = {}
 d = {}
 d[''] = 0
-mapping_d[''] = "no genes"
-for lines in mappingfh:
-	line = lines.rstrip().split('\t')
-	print line
-	mapping_d[line[0]]=line[1]
-	d[line[0]] = 0
-categories = {}
-for elem in mapping_d.values():
-	categories[elem] = 0
+
+dna = ["d1","d2","d3","d4"]
+rna = ["r1","r2","r3","r4"]
+
+cross_lookup = {}
+for elem in zip(dna,rna):
+	cross_lookup[elem[0]] = elem[1]
+	cross_lookup[elem[1]] = elem[0]
+
+print cross_lookup
 
 current = set()
 for lines in ifh:
 	sline = lines.rstrip()
+	matching = False	
 	if '>' in sline:
-		existing = d[set_to_key(current)]
-		existing += 1
-		d[set_to_key(current)] = existing
+		for elem in current:
+			if cross_lookup[elem] in current:
+				matching = True
+		if matching == True:	
+			if set_to_key(current) in d.keys():
+				existing = d[set_to_key(current)]
+				existing += 1
+				d[set_to_key(current)] = existing
+			else:
+				d[set_to_key(current)] = 1
+		else:
+			if "no_correspondence" in d.keys():
+				existing1 = d["no_correspondence"]
+				existing1 += 1
+				d["no_correspondence"] = existing1
+			else:
+				d["no_correspondence"] = 1
 		current = set()
-	else:
-		current.add(int(sline))
+	else:		
+		current.add(sline)
 
-for x in mapping_d.keys():
-	ex = categories[mapping_d[x]]
-	ex += d[x]
-	categories[mapping_d[x]] = ex
 
 total = sum(d.values())
-total2 = sum(categories.values())
 print "total gene families: "+str(total)
 for elem in d.keys():
 	print elem+'\t'+str(d[elem])+'\t'+str(d[elem]/total)
-print "-------------"
-for elem in categories.keys():
-	print elem+'\t'+str(categories[elem])+'\t'+str(categories[elem]/total)
 
