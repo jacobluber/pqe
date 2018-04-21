@@ -1,0 +1,7 @@
+library(Rcpp)
+Rcpp::sourceCpp("bc.cpp")
+args <- commandArgs(trailingOnly = TRUE)
+dff <- read.csv(args[1],header=TRUE,row.names=1,sep='\t',check.names=FALSE)
+dfm <- t(as.matrix(dff))
+mat <- bray_curtis(dfm,length(dfm[,1])) 
+write.table(mat,file=args[2])
