@@ -1,0 +1,9 @@
+#SampleID	12293355_rnatax_2
+k__Viruses	100.0
+k__Viruses|p__Viruses_noname	100.0
+k__Viruses|p__Viruses_noname|c__Viruses_noname	100.0
+k__Viruses|p__Viruses_noname|c__Viruses_noname|o__Viruses_noname	100.0
+k__Viruses|p__Viruses_noname|c__Viruses_noname|o__Viruses_noname|f__Virgaviridae	100.0
+k__Viruses|p__Viruses_noname|c__Viruses_noname|o__Viruses_noname|f__Virgaviridae|g__Tobamovirus	100.0
+k__Viruses|p__Viruses_noname|c__Viruses_noname|o__Viruses_noname|f__Virgaviridae|g__Tobamovirus|s__Tomato_mosaic_virus	100.0
+k__Viruses|p__Viruses_noname|c__Viruses_noname|o__Viruses_noname|f__Virgaviridae|g__Tobamovirus|s__Tomato_mosaic_virus|t__PRJNA14926	100.0
