@@ -1,0 +1,5 @@
+#Gene	samp1	samp2	samp3
+g1	1	0	0
+g2	1	0	0
+g3	0	1	1
+g4	0	0	0

@@ -34,3 +34,7 @@ humann2_join_tables --input ${1} --file_name bugs --output ${1}/${1}_bugs.tsv
 humann2_renorm_table --input ${1}/${1}_dna.tsv --output ${1}/${1}_dna_relab.tsv --units relab
 humann2_renorm_table --input ${1}/${1}_rna.tsv --output ${1}/${1}_rna_relab.tsv --units relab
 humann2_renorm_table --input ${1}/${1}_bugs.tsv --output ${1}/${1}_bugs_relab.tsv --units relab
+Rscript fig2.R ${1}/${1}_dna_relab.tsv 2>> dna_jaccard.txt
+Rscript fig2.R ${1}/${1}_rna_relab.tsv 2>> rna_jaccard.txt
+Rscript fig2.R ${1}/${1}_bugs_relab.tsv 2>> bugs_jaccard.txt
+mv ${1} jaccard_data

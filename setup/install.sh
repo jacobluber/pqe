@@ -32,3 +32,5 @@ echo "export PATH=\${PATH}:/home/ubuntu/metaphlan2" >> $HOME/.bashrc
 
 #aws
 sudo apt-get install awscli
+
+#megahit and prokka were installed directly via binaries that I had previously compiled for this AMI Linux version.
