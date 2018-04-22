@@ -44,9 +44,10 @@ for x in mapping_d.keys():
 total = sum(d.values())
 total2 = sum(categories.values())
 print "total gene families: "+str(total)
+print d.keys()
 for elem in d.keys():
-	print elem+'\t'+str(d[elem])+'\t'+str(d[elem]/total)
-print "-------------"
+	#print elem+'\t'+str(d[elem])+'\t'+str(d[elem]/total)
+#print "-------------"
 for elem in categories.keys():
-	print elem+'\t'+str(categories[elem])+'\t'+str(categories[elem]/total)
+	#print elem+'\t'+str(categories[elem])+'\t'+str(categories[elem]/total)
 

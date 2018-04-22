@@ -41,14 +41,17 @@ for lines in ifh:
 					all_rna_concordant = False
 		if dna_bool and rna_bool:
 			matching = True
+		#print current
+		#print "all_concordant: "+all_concordant
 		if concordant and matching:
-                        if "at_least_one_concordant" in d.keys():
+			if "at_least_one_concordant" in d.keys():
                                 m1 = d["at_least_one_concordant"]
                                 m1 += 1
                                 d["at_least_one_concordant"] = m1
                         else:
                                 d["at_least_one_concordant"] = 1
 		if all_concordant and matching:
+			#print current
 			if "all_concordant" in d.keys():
                                 m2 = d["all_concordant"]
                                 m2 += 1
@@ -90,21 +93,20 @@ for lines in ifh:
                                 d["total_families_with_rna"] = m7
                         else:
                                 d["total_families_with_rna"] = 1
-		else:
-			if dna_bool and not rna_bool:
-				if "dna_only" in d.keys():
-					existing1 = d["dna_only"]
-					existing1 += 1
-					d["dna_only"] = existing1
-				else:
-					d["dna_only"] = 1
-			if rna_bool and not dna_bool:
-				if "rna_only" in d.keys():
-                                        existing2 = d["rna_only"]
-                                        existing2 += 1
-                                        d["rna_only"] = existing2
-                                else:
-                                        d["rna_only"] = 1
+		if dna_bool and not rna_bool:
+			if "dna_only" in d.keys():
+				existing1 = d["dna_only"]
+				existing1 += 1
+				d["dna_only"] = existing1
+			else:
+				d["dna_only"] = 1
+		if rna_bool and not dna_bool:
+			if "rna_only" in d.keys():
+				existing2 = d["rna_only"]
+                                existing2 += 1
+                                d["rna_only"] = existing2
+                        else:
+                        	d["rna_only"] = 1
 		current = set()
 	else:		
 		current.add(sline)
@@ -112,7 +114,8 @@ for lines in ifh:
 
 #total = sum(d.values())
 #print "total gene families: "+str(total)
-for elem in d.keys():
+sortedKeys = sorted(d.keys())
+for elem in sortedKeys:
 	print elem+'\t'+str(d[elem])
 	#print elem+'\t'+str(d[elem])+'\t'+str(d[elem]/total)
 ifh.close()
